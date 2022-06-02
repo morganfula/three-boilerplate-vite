@@ -50,6 +50,7 @@ export default class Sketch {
 		this.geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
 		this.material = new THREE.MeshNormalMaterial();
 
+		// Shader Marterial
 		this.material = new THREE.ShaderMaterial({
 			fragmentShader: fragment,
 			vertexShader: vertex,
