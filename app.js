@@ -24,16 +24,29 @@ export default class Sketch {
 		this.renderer.setSize(this.width, this.height);
 		this.container.appendChild(this.renderer.domElement);
 
+		//enable controls
 		this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
+		this.resize();
+		this.setupResize();
 		this.addObjects();
 		this.render();
 	}
 
-	resize() {}
+	setupResize() {
+		window.addEventListener('resize', this.resize.bind(this));
+	}
+
+	resize() {
+		this.width = this.container.offsetWidth;
+		this.height = this.container.offsetHeight;
+		this.renderer.setSize(this.width, this.height);
+		this.camera.aspect = this.width / this.height;
+		this.camera.updateProjectionMatrix();
+	}
 
 	addObjects() {
-		this.geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+		this.geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
 		this.material = new THREE.MeshNormalMaterial();
 
 		this.mesh = new THREE.Mesh(this.geometry, this.material);
